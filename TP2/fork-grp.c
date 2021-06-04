@@ -11,28 +11,43 @@ int main(void) {
     child_1 = fork();
 
     if (child_1 == 0) {
-        printf("Processus %d, groupe %d\n", getpid(), getpgid());
-        for (int i = 0; i < 30; ++i)
+        printf("Processus %d, groupe %d\n", getpid(), getpgid(getpid()));
+        for (int i = 0; i < 70; ++i)
         {
             printf("%d survis\n", getpid());
             sleep(1);
         }
     } else {
-         printf("Processus %d, groupe %d\n", getpid(), getpgrp());
-         child_2 = fork();
-         if (child_2 == 0) {
-             for (int i = 0; i < 30; ++i)
+        printf("Processus %d, groupe %d\n", getpid(), getpgid(getpid()));
+        child_2 = fork();
+        if (child_2 != 0) {
+            for (int i = 0; i < 70; ++i)
             {
                 printf("%d survis\n", getpid());
                 sleep(1);
             }
-         } else {
-            printf("Processus %d, groupe %d\n", getpid(), getpgrp());
-            for (int i = 0; i < 30; ++i)
+        } else {
+            printf("Processus %d, groupe %d\n", getpid(), getpgid(getpid()));
+            printf("retour changement groupe : %d\n", setpgid(getpid(), getpid()));
+            printf("Processus %d, groupe %d\n", getpid(), getpgid(getpid()));
+            sleep(5);
+            pid_t insensitive = fork();
+            printf("Processus %d, groupe %d\n", getpid(), getpgid(getpid()));
+            if (insensitive == 0)
             {
-                printf("%d survis\n", getpid());
-                sleep(1);
+                for (int i = 0; i < 70; ++i)
+                {
+                    printf("%d survis\n", getpid());
+                    sleep(1);
+                }
+            } else {
+                for (int i = 0; i < 70; ++i)
+                {
+                    printf("%d survis\n", getpid());
+                    sleep(1);
+                }
+
             }
         }
     }
-} 
+}
