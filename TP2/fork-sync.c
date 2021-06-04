@@ -21,13 +21,13 @@ int main(void)
         exit(42);
     } else {
         printf("Mon PID (pere) est %d\n", getpid());
-        do {
-            wpid = wait(&status);
-            if (wpid != -1) {
-                printf("mon fils est mort ; son code de sortie est : %d\n",
-                        WEXITSTATUS(status));
-            }
-        } while(!WIFEXITED(status));
+        // signal(SIGCHLD, SIG_IGN);
+        // sleep(10);
+        wpid = wait(&status);
+        if (wpid != -1) {
+            printf("mon fils est mort ; son code de sortie est : %d\n",
+                    WEXITSTATUS(status));
+        }
     }
     return 0;
 }
