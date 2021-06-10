@@ -7,10 +7,10 @@ int main(void) {
     if (getrusage(RUSAGE_SELF, &my_sys) < 0)
         return 1;
 
-    printf("Taille résidente maximale : %ld\n", my_sys.ru_maxrss);
-    printf("Taille de la mémoire partagée : %ld\n", my_sys.ru_ixrss);
-    printf("Taille de la mémoire non partagée : %ld\n", my_sys.ru_idrss);
-    printf("Taille de la pile : %ld\n", my_sys.ru_isrss);
+    printf("Taille résidente maximale : %ld octets\n", my_sys.ru_maxrss);
+    printf("Taille de la mémoire partagée : %ld octets\n", my_sys.ru_ixrss);
+    printf("Taille de la mémoire non partagée : %ld octets\n", my_sys.ru_idrss);
+    printf("Taille de la pile : %ld octets\n", my_sys.ru_isrss);
     printf("Demande de pages : %ld\n", my_sys.ru_minflt);
     printf("Nombre de fautes de pages : %ld\n", my_sys.ru_majflt);
     printf("Nombre de swaps : %ld\n", my_sys.ru_nswap);
@@ -25,8 +25,8 @@ int main(void) {
     if (getrusage(RUSAGE_SELF, &my_end) < 0)
         return 1;
 
-    printf("Temps CPU utilisé par l'utilisateur : %ld\n",
+    printf("Temps CPU utilisé par l'utilisateur : %ld microsecondes\n",
             my_end.ru_utime.tv_usec - my_sys.ru_utime.tv_usec);
-    printf("Temps CPU utilisé par le système : %ld\n",
+    printf("Temps CPU utilisé par le système : %ld microsecondes\n",
             my_end.ru_stime.tv_usec - my_sys.ru_stime.tv_usec);
 }

@@ -22,7 +22,7 @@ int main(void)
     } else {
         printf("Mon PID (pere) est %d\n", getpid());
         // signal(SIGCHLD, SIG_IGN);
-        // sleep(10);
+        // sleep(30);
         wpid = wait(&status);
         if (wpid != -1) {
             printf("mon fils est mort ; son code de sortie est : %d\n",
@@ -31,3 +31,4 @@ int main(void)
     }
     return 0;
 }
+

@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
     if (argc == 1) {
         if (getrusage(RUSAGE_SELF, &my_sys) < 0)
             return 1;
-        print_info(my_sys);
+        print_info(my_sys); // Affiche les statistiques concernant le processus
         return 0;
     }
     if (argc != 2)
